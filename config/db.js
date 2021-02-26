@@ -6,9 +6,11 @@ const connectDB = async () => {
   try {
     await moongse.connect(db, {
       useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true,
     });
     console.log("Mongodb connected");
-  } catch (e) {
+  } catch (err) {
     console.log(err.message);
     process.exit(1);
   }
