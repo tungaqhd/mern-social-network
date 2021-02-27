@@ -9,6 +9,10 @@ export const Navbar = (props) => {
         <Link to='profiles'>Developers</Link>
       </li>
       <li>
+        <Link href='/dashboard'>
+          <i className='fas fa-user'></i>{" "}
+          <span className='hide-sm'>Dashboard</span>
+        </Link>
         <a href='#!' onClick={props.logout}>
           <i className='fas fa-sign-out-alt'></i>{" "}
           <span className='hide-sm'>Logout</span>
