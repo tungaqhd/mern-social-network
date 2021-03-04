@@ -1,4 +1,11 @@
-import { CLEAR_PROFILE, GET_PROFILE, PROFILE_ERROR } from "../actions/types";
+import {
+  CLEAR_PROFILE,
+  GET_PROFILE,
+  PROFILE_ERROR,
+  UPDATE_PROFILE,
+  GET_PROFILES,
+  GET_REPOS,
+} from "../actions/types";
 const initialState = {
   profile: null,
   profiles: [],
@@ -11,9 +18,15 @@ const profileMiddleware = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
     case GET_PROFILE:
+    case UPDATE_PROFILE:
       return {
         ...state,
-        profile: state,
+        profile: {
+          ...payload,
+          skills: payload.skills,
+          education: payload.education,
+          experience: payload.experience,
+        },
         loading: false,
       };
     case PROFILE_ERROR:
@@ -24,11 +37,22 @@ const profileMiddleware = (state = initialState, action) => {
       };
     case CLEAR_PROFILE:
       return {
-        profile: null,
         profiles: [],
         repos: [],
         loading: true,
         error: {},
+      };
+    case GET_PROFILES:
+      return {
+        ...state,
+        profiles: payload,
+        loading: false,
+      };
+    case GET_REPOS:
+      return {
+        ...state,
+        repos: payload,
+        loading: false,
       };
     default:
       return state;

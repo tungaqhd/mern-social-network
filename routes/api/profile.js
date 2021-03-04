@@ -42,7 +42,7 @@ router.post(
   async (req, res) => {
     const err = validationResult(req);
     if (!err.isEmpty()) {
-      res.status(400).json({ errors: err.array() });
+      return res.status(400).json({ errors: err.array() });
     }
 
     const {
@@ -81,9 +81,6 @@ router.post(
     }
     if (githubUsername) {
       profileFields.githubUsername = githubUsername;
-    }
-    if (skills) {
-      profileFields.skills = skills;
     }
     if (youtube) {
       profileFields.social.youtube = youtube;
@@ -225,7 +222,7 @@ router.put(
       profile.experience.unshift(newExp);
       await profile.save();
 
-      res.json({ msg: "Experience updated" });
+      res.json(profile);
     } catch (err) {
       console.log(err);
       res.status(500).send("Server Error");
@@ -300,7 +297,7 @@ router.put(
       profile.education.unshift(newEducation);
       await profile.save();
 
-      res.json({ msg: "Education updated" });
+      res.json(profile);
     } catch (err) {
       console.log(err);
       res.status(500).send("Server Error");
