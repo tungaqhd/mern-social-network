@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 const ProfileItem = (props) => {
   return (
     <Fragment>
-      <div class='profile bg-light'>
-        <img class='round-img' src={props.profile.user.avatar} alt='' />
+      <div className='profile bg-light'>
+        <img className='round-img' src={props.profile.user.avatar} alt='' />
         <div>
           <h2>{props.profile.user.name}</h2>
           <p>
@@ -16,7 +16,7 @@ const ProfileItem = (props) => {
           <p className='my-1'>{props.profile.location}</p>
           <Link
             to={"/profile/" + props.profile.user._id}
-            class='btn btn-primary'
+            className='btn btn-primary'
           >
             View Profile
           </Link>
@@ -25,8 +25,8 @@ const ProfileItem = (props) => {
         <ul>
           {props.profile.skills.slice(0, 4).map((skill, ind) => (
             <Fragment>
-              <li key={ind} class='text-primary'>
-                <i class='fas fa-check'></i> {skill}
+              <li key={ind} className='text-primary'>
+                <i className='fas fa-check'></i> {skill}
               </li>
             </Fragment>
           ))}

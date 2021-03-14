@@ -99,7 +99,11 @@ router.post(
     }
 
     if (skills) {
-      profileFields.skills = skills.split(",").map((skill) => skill.trim());
+      if (!Array.isArray(skills)) {
+        profileFields.skills = skills.split(",").map((skill) => skill.trim());
+      } else {
+        profileFields.skills = skills.map((skill) => skill.trim());
+      }
     }
 
     try {

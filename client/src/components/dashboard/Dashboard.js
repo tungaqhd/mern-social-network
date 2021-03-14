@@ -7,27 +7,34 @@ import Education from "./Education";
 import { Link, withRouter } from "react-router-dom";
 import DashboardActions from "./DashboardActions";
 import { deleteAccount } from "../../actions/profile";
-const Dashboard = (props) => {
+const Dashboard = ({
+  getCurrentProfile,
+  loading,
+  profile,
+  deleteAccount,
+  history,
+  auth,
+}) => {
   useEffect(() => {
-    props.getCurrentProfile();
-  }, []);
-  return props.loading ? (
+    getCurrentProfile();
+  }, [getCurrentProfile]);
+  return loading ? (
     <Spinner />
   ) : (
     <Fragment>
       <h1 className='large text-primary'>Dashboard</h1>
       <p className='lead'>
-        <i className='fas fa-user'></i> Welcome {props.auth.user.name}
+        <i className='fas fa-user'></i> Welcome {auth.user.name}
       </p>
-      {props.profile !== null ? (
+      {profile !== null ? (
         <Fragment>
           <DashboardActions />
-          <Experience experience={props.profile.experience} />
-          <Education education={props.profile.education} />
+          <Experience experience={profile.experience} />
+          <Education education={profile.education} />
           <div className='my-2'>
             <button
               className='btn btn-danger'
-              onClick={() => props.deleteAccount(props.history)}
+              onClick={() => deleteAccount(history)}
             >
               <i className='fas fa-user-minus'></i> Delete account
             </button>

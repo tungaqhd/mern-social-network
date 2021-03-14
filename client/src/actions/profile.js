@@ -7,6 +7,7 @@ import {
   UPDATE_PROFILE,
   CLEAR_PROFILE,
   GET_PROFILES,
+  GET_REPOS,
 } from "./types";
 
 export const getCurrentProfile = () => async (dispatch) => {
@@ -139,7 +140,7 @@ export const deleteEducation = (eduId) => async (dispatch) => {
 export const deleteAccount = (history) => async (dispatch) => {
   if (window.confirm("Are you sure? This can NOT be undone!")) {
     try {
-      const res = await axios.delete("/api/profile");
+      await axios.delete("/api/profile");
       dispatch({
         type: CLEAR_PROFILE,
       });
@@ -158,7 +159,6 @@ export const deleteAccount = (history) => async (dispatch) => {
 };
 
 export const getProfiles = () => async (dispatch) => {
-  dispatch({ type: CLEAR_PROFILE });
   try {
     const res = await axios.get("/api/profile/");
 
@@ -192,9 +192,9 @@ export const getProfileById = (userId) => async (dispatch) => {
 
 export const getGithubRepos = (gitUsername) => async (dispatch) => {
   try {
-    const res = await axios.get("/api/profile/user/" + gitUsername);
+    const res = await axios.get("/api/profile/github/" + gitUsername);
 
-    dispatch({ type: GET_PROFILE, payload: res.data });
+    dispatch({ type: GET_REPOS, payload: res.data });
   } catch (error) {
     dispatch({
       type: PROFILE_ERROR,

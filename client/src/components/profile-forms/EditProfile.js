@@ -62,7 +62,7 @@ const EditProfile = ({
       linkin: loading || !profile.linkin ? "" : profile.linkin,
       instagram: loading || !profile.instagram ? "" : profile.instagram,
     });
-  }, [loading]);
+  }, [loading, getCurrentProfile]);
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
